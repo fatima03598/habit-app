@@ -23,6 +23,14 @@ const createToken = () => {
   });
 };
 
+
+
+const findByToken = (token) => {
+  return Users().where("token", token).first();
+  // return database.raw("SELECT * FROM users WHERE token = ?", [token])
+  //   .then((data) => data.rows[0])
+}
+
 const checkPassword = (reqPassword, foundUser) => {
   return new Promise((resolve, reject) => {
     bcrypt.compare(reqPassword, foundUser.password_digest, (err, response) => {
@@ -99,6 +107,7 @@ module.exports = {
   createToken: createToken,
   checkPassword: checkPassword,
   updateUserToken: updateUserToken,
+  findByToken:findByToken,
   getUserHabits: getUserHabits,
   addHabit: addHabit,
   deleteHabit: deleteHabit,

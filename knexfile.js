@@ -1,47 +1,28 @@
-require("dotenv").config();
+require('dotenv').config();
+
 module.exports = {
-  test: {
-    client: "pg",
-    connection: {
-      host: "localhost",
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: "habitdb_test"
-    },
-    migrations: {
-      directory: __dirname + "/habitdb/migrations",
-    },
-    seeds: {
-      directory: __dirname + "/habitdb/seeds/test",
-    },
-  },
   development: {
-    client: "pg",
-    connection: {
-      host: "localhost",
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: "habitdb",
-    },
+    client: 'pg',
+    connection:process.env.DEVELOPMENT_URL,
     migrations: {
-      directory: __dirname + "/habitdb/migrations",
+      directory: './habitdb/migrations'
     },
     seeds: {
-      directory: __dirname + "/habitdb/seeds/development",
+      directory: './habitdb/seeds/dev'
     },
+    useNullAsDefault: true
   },
-  production: {
-    client: "pg",
-    connection: {
-      database: "my_db",
-      user: "username",
-      password: "password",
-    },
+
+  test: {
+    client: 'pg',
+    connection:process.env.TEST_URL,
     migrations: {
-      directory: __dirname + "/habitdb/migrations",
+      directory: './habitdb/migrations'
     },
     seeds: {
-      directory: __dirname + "/habitdb/seeds/production",
+      directory: './habitdb/seeds/test'
     },
+    useNullAsDefault: true
   },
-};
+
+}

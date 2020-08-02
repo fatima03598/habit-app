@@ -1,6 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../habitdb/queries");
+// 0
+
+let authenticate = (token, username) => {
+  Users.findByToken(token)
+    .then((user) => {
+      if (user.username == username) {
+        console.log(true)
+        return true;
+      } else {
+        console.log(false)
+        return false;
+      }
+    })
+}
 
 router.post("/signup", (req, res, next) => {
   const user = req.body;
@@ -26,6 +40,58 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+
+router.get("/getInfo/:username/:token", async(req, res, next) => {
+  const token = req.params.token
+  const username = req.params.username
+  // if(authenticate(token, username)) {
+  //   Users.getSingle(userReq.username)
+  //   .then( (user) => {
+  //       const userInfo = {
+  //         user_id: user.user_id,
+  //         userName: user.name,
+  //         userSurname: user.surname
+  //       }
+  //       return res.status(200).json({userInfo})
+  //   })
+  // } else {
+  //   res.status(404).json({message: "not logged in"})
+ // }
+ try {
+  await authenticate(token, username)
+  Users.getSingle(username)
+     .then((foundUser) => {
+      const userInfo = {
+                user_id: foundUser.user_id,
+                userName: foundUser.name,
+                userSurname: foundUser.surname
+              }
+            
+      return userInfo
+     })
+     .then((userInfo) =>  res.status(200).json({userInfo}))
+} catch (error) {
+  return next(error)
+}
+
+
+})
+router.put("/logout", async(req, res, next) => {
+  const username = req.body.username;
+  const token = req.body.token;
+  try {
+    await authenticate(token, username)
+    Users.getSingle(username)
+       .then((foundUser) => {
+       return Users.updateUserToken('loggedOut', foundUser.username)
+       })
+       .then(() => res.status(200).json({ message: "token deleted" }))
+  } catch (error) {
+    return next(error)
+  }
+
+});
+
 router.post("/signin", (req, res, next) => {
   const userReq = req.body;
   let user;
@@ -38,12 +104,17 @@ router.post("/signin", (req, res, next) => {
     .then((token) => Users.updateUserToken(token, user.username))
     .then(() => {
       delete user.password_digest;
-      const userInfo = {
-        user_id: user.user_id,
-        userName: user.name,
-        userSurname: user.surname,
-      };
-      res.status(200).json({ userInfo });
+      Users.getSingle(user.username)
+      .then((updatedUser) => {
+        const userInfo = {
+          // user_id: user.user_id,
+          // userName: user.name,
+          // userSurname: user.surname,
+          username:updatedUser.username,
+          token:updatedUser.token
+        };
+        res.status(200).json({ userInfo });
+      })
     })
     .catch((err) => res.status(404).json({ message: "either username and password did not mach" }));
 });
