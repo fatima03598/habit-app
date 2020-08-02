@@ -42,7 +42,7 @@ class Dashboard extends Component {
               <div
                 className="modal fade"
                 id="exampleModal"
-                tabindex="-1"
+                tabIndex="-1"
                 role="dialog"
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
@@ -63,12 +63,12 @@ class Dashboard extends Component {
                       </button>
                     </div>
                     <div className="modal-body">
-                      {/* <ViewHabit user={user_id} date={date} /> */}
+                      <ViewHabit user={user_id} date={date} />
                     </div>
                     <div className="modal-footer">
                       <button
                         type="button"
-                        class="btn btn-secondary"
+                        className="btn btn-secondary"
                         data-dismiss="modal"
                       >
                         Close

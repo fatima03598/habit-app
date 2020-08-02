@@ -20,8 +20,8 @@ class ViewHabit extends Component {
   }
 
   getStreak = (string) => {
-    let split = string.split("-");
-    return parseInt(split[3]);
+    let splitDate = string.split("-");
+    return parseInt(splitDate[3]);
   };
   render() {
     const logo = this.props.description;

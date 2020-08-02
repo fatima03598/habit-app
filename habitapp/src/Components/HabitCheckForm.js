@@ -51,12 +51,12 @@ class HabitCheckForm extends Component {
         ) {
           return toComplete.push(object);
         } else {
-          console.log("streak shown");
+          console.log("checked");
         }
       } else if (object.complete.length === 0) {
         return toComplete.push(object);
       } else {
-        console.log("no streak");
+        console.log("no to do");
       }
     });
   };

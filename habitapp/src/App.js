@@ -11,25 +11,8 @@ import LoadingPage from "./Components/LoadingPage";
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-     authenticated:false
-    };
-  }
 
-// componentDidMount () {
-//   const id = localStorage.getItem('id')
-//   console.log(id)
-//   if(id === 2) {
-//     console.log(id)
-//   this.setState({
-//     authenticated:true
-//   }, console.log(this.state.authenticated))
-// }
-// }
- 
 
   render() {
     return (
@@ -37,7 +20,7 @@ class App extends React.Component {
         <Router>
          
           <Switch>
-            <Route exact path="/login" component={() => <LoginPage authenticate={this.authenticate} />} />
+            <Route exact path="/login" component={() => <LoginPage  />} />
 
             <Route exact path="/register" component={RegisterPage} />
   

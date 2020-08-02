@@ -64,7 +64,7 @@ class Streak extends Component {
           {
             currentStreak: 0,
           },
-          () => this.submitStreak()
+          // () => this.submitStreak()
         );
       }
     }
