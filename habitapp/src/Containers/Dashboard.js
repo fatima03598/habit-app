@@ -3,41 +3,16 @@ import { Redirect } from "react-router-dom";
 import NewHabit from "../Components/NewHabit";
 import ViewHabit from "../Components/ViewHabit";
 import HabitCheckForm from "../Components/HabitCheckForm";
+import Navigation from "../Components/Navigation";
 class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: "",
-      dayWeek: "",
-      weekday: [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ],
-    };
-  }
 
-  componentDidMount() {
-    const date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    let newdate = day + "-" + month + "-" + year;
-    let dayWeek = this.state.weekday[date.getDay()];
-    this.setState({
-      date: newdate,
-      dayWeek: dayWeek,
-    });
-  }
   render() {
-    const { user_id, userName, userSurname } = this.props.location.state.data;
-    const { dayWeek, date } = this.state;
+    
+     const { user_id, userName, userSurname} = this.props.data
+    const { dayWeek, date } = this.props;
     return (
       <div className="container-fluid" id="HomePage">
+         <Navigation />
         <div className="row">
           <div className="col-lg-2" id="asideArea">
             <h1>{dayWeek}</h1>
@@ -88,7 +63,7 @@ class Dashboard extends Component {
                       </button>
                     </div>
                     <div className="modal-body">
-                      <ViewHabit user={user_id} date={date} />
+                      {/* <ViewHabit user={user_id} date={date} /> */}
                     </div>
                     <div className="modal-footer">
                       <button

@@ -9,6 +9,7 @@ class LoginPage extends Component {
       password: "",
       data: [],
       toDashboard: false,
+      authenticated:false
     };
   }
   handlePassword = (e) => {
@@ -18,6 +19,7 @@ class LoginPage extends Component {
     this.setState({ username: e.target.value });
   };
   handleSubmit = (e) => {
+    e.preventDefault();
     const data = {
       username: this.state.username,
       password_digest: this.state.password,
@@ -35,7 +37,15 @@ class LoginPage extends Component {
       })
       .then((data) => {
         console.log(data);
-        this.setState({ data: data.userInfo, toDashboard: true });
+        const username = data.userInfo.username
+        const token = data.userInfo.token
+        localStorage.setItem("username", username  );
+        localStorage.setItem("token", token  );
+        
+       
+      })
+      .then(() => {
+        this.setState({ data: data.userInfo, toDashboard: true, authenticated:true });
       })
       .catch((error) => {
         console.log("error: " + error);
@@ -43,7 +53,7 @@ class LoginPage extends Component {
         window.alert("wrong username and password");
         this.setState({ requestFailed: true });
       });
-    e.preventDefault();
+  
     // this.props.loadFunction(this.state);
   };
 
@@ -57,7 +67,7 @@ class LoginPage extends Component {
           }}
         />
       );
-    }
+    } 
     return (
       <div className="container-fluid" id="HomePage">
         <div className="row">
