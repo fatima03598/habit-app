@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import NavBar from "../Components/NavBar";
 class RegisterPage extends Component {
   constructor(props) {
     super(props);
@@ -59,10 +60,9 @@ class RegisterPage extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="container-fluid" id="HomePage">
-        <div className="row">
-          <div className="col-lg-3" id="asideArea"></div>
-          <div className="col-lg-6">
+      <div id="HomePage">
+        <NavBar/>
+
             <div className="App-body">
               <form onSubmit={this.handleSubmit}>
                 <div className="form-row">
@@ -140,9 +140,6 @@ class RegisterPage extends Component {
               </form>
             </div>
           </div>
-          <div className="col-lg-3" id="asideArea"></div>
-        </div>
-      </div>
     );
   }
 }

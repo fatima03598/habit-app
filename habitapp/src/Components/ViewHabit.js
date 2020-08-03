@@ -24,8 +24,9 @@ class ViewHabit extends Component {
     return parseInt(splitDate[3]);
   };
   render() {
-    const logo = this.props.description;
-    const logo1 = logo + ".png";
+    // const logo = this.props.description;
+    // console.log(logo)
+    // const logo1 = logo + ".png";
     return (
       <div id="viewHabits">
         {this.state.habitData ? (

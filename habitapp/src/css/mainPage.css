@@ -1,0 +1,27 @@
+.mainPage {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.mainImage {
+    display: flex;
+    flex: 2;
+    background-image: url("/background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    
+}
+.mainImage h1 {
+    font-size: 6em;
+}
+
+.mainDescription {
+    display: flex;
+    flex: 1;
+    background-color: #F1FAEE;
+    justify-content: center;
+    align-items: center;
+}

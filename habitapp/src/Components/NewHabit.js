@@ -28,7 +28,7 @@ export class NewHabit extends Component {
       userId: this.props.user,
       current_streak: `${this.props.date}-0`,
       highest_streak: `${this.props.date}-0`,
-      complete: [],
+      complete: ['2-8-2020'],
     };
     fetch("/habitapi/newhabit", {
       method: "POST",

@@ -8,9 +8,11 @@ import RegisterPage from "./Containers/RegisterPage";
 import LoginPage from "./Containers/LoginPage";
 import PrivateRoute from "./Components/PrivateRoute";
 import LoadingPage from "./Components/LoadingPage";
+import MainPage from "./Components/MainPage";
+import Footer from "./Components/Footer";
+
 
 class App extends React.Component {
-
 
 
 
@@ -18,15 +20,19 @@ class App extends React.Component {
     return (
       <div className="App">
         <Router>
-         
           <Switch>
-            <Route exact path="/login" component={() => <LoginPage  />} />
+          <PrivateRoute  path='/dashboard' component={LoadingPage} />
+          
+          <Route exact path="/login" component={() => <LoginPage  />} />
 
-            <Route exact path="/register" component={RegisterPage} />
+           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/" component={MainPage} />
+       
   
 
-            <PrivateRoute  path='/dashboard' component={LoadingPage} />
+           
           </Switch>
+          <Footer/>
         </Router>
       </div>
     );

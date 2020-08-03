@@ -21,12 +21,18 @@ class Streak extends Component {
   }
 
   increment = () => {
+    console.log('his increment ' + this.state.currentStreak)
+    console.log('tthis increment' + this.state.highestStreak)
+    const current = this.state.currentStreak
     this.setState(
       {
-        currentStreak: this.state.currentStreak + 1,
+        currentStreak: current + 1,
       },
       () => {
         if (this.state.currentStreak > this.props.highest_streak) {
+          console.log(' increment ' + this.state.currentStreak)
+          console.log(' increment' + this.state.highestStreak)
+
           this.higher();
         }
       }
@@ -34,13 +40,16 @@ class Streak extends Component {
   };
 
   higher = () => {
+    console.log('current ' + this.state.currentStreak)
+    const current = this.state.currentStreak
     this.setState({
-      highestStreak: this.state.currentStreak,
+      highestStreak: current,
     });
   };
 
   async sendStreak() {
     await this.checkStreak();
+    console.log('before submit ' + this.state.currentStreak)
     this.submitStreak();
   }
 
@@ -71,12 +80,13 @@ class Streak extends Component {
   };
 
   submitStreak = () => {
-    const CurrentStreak = this.props.date + "-" + this.state.currentStreak;
-    const HighestStreak = this.props.date + "-" + this.state.highestStreak;
-
+    const currentStreaks = this.props.date + "-" + this.state.currentStreak;
+    const highestStreaks = this.props.date + "-" + this.state.highestStreak;
+    console.log('on submit ' + this.state.currentStreak)
+    console.log('on submit ' + currentStreaks)
     const data = {
-      current_streak: CurrentStreak,
-      highest_streak: HighestStreak,
+      current_streak: currentStreaks,
+      highest_streak: highestStreaks,
     };
 
     fetch("/habitapi/addStrike/" + this.props.habit, {
