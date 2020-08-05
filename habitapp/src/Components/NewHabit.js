@@ -26,8 +26,8 @@ export class NewHabit extends Component {
       description: this.state.habitDes,
       frequency: this.state.frequency,
       userId: this.props.user,
-      current_streak: `${this.props.date}-0`,
-      highest_streak: `${this.props.date}-0`,
+      current_streak: `0`,
+      highest_streak: `0`,
       complete: [],
     };
     fetch("/habitapi/newhabit", {

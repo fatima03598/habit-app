@@ -1,49 +1,35 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-//components
-
-//containers
 import RegisterPage from "./Containers/RegisterPage";
 import LoginPage from "./Containers/LoginPage";
 import PrivateRoute from "./Components/PrivateRoute";
 import LoadingPage from "./Components/LoadingPage";
+import MainPage from "./Components/MainPage";
+
+
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
 
-    this.state = {
-     authenticated:false
-    };
-  }
-
-// componentDidMount () {
-//   const id = localStorage.getItem('id')
-//   console.log(id)
-//   if(id === 2) {
-//     console.log(id)
-//   this.setState({
-//     authenticated:true
-//   }, console.log(this.state.authenticated))
-// }
-// }
- 
 
   render() {
     return (
       <div className="App">
         <Router>
-         
           <Switch>
-            <Route exact path="/login" component={() => <LoginPage authenticate={this.authenticate} />} />
+          <PrivateRoute  path='/dashboard' component={LoadingPage} />
+          
+          <Route exact path="/login" component={() => <LoginPage  />} />
 
-            <Route exact path="/register" component={RegisterPage} />
+           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/" component={MainPage} />
+       
   
 
-            <PrivateRoute  path='/dashboard' component={LoadingPage} />
+           
           </Switch>
+        
         </Router>
       </div>
     );

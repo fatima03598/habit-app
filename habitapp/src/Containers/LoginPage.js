@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import alert from "alert";
+import NavBar from "../Components/NavBar";
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -69,10 +70,8 @@ class LoginPage extends Component {
       );
     } 
     return (
-      <div className="container-fluid" id="HomePage">
-        <div className="row">
-          <div className="col-lg-3" id="asideArea"></div>
-          <div className="col-lg-6">
+      <div  id="HomePage">
+        <NavBar/>  
             <div className="App-body" id="formArea">
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group row">
@@ -102,17 +101,10 @@ class LoginPage extends Component {
                 <button type="submit" className="loginButton">
                   Login
                 </button>
-                <Link to="/register">
-                  <button type="button" className="loginButton">
-                    Sign up
-                  </button>
-                </Link>
               </form>
             </div>
           </div>
-          <div className="col-lg-3" id="asideArea"></div>
-        </div>
-      </div>
+       
     );
   }
 }

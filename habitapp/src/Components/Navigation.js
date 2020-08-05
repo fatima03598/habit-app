@@ -1,29 +1,60 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+ class Navigation extends Component {
+
+
+  async Logout (e) {
+    e.preventDefault();
+    const username = await localStorage.getItem('username');
+    const token = await localStorage.getItem('token');
+    console.log(username)  
+    console.log(token) 
+      const data = {
+        username: username,
+        token:token
+      };
+        fetch("api/logout", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => {
+       
+          if (!response.ok) { console.log(response)
+            throw new Error(response.status)}
+          else  {   
+            delete localStorage.username;
+            delete localStorage.token
+             return response.json()}
+        })
+        .catch((error) => {
+          console.log("error: " + error);
+        });
+     
+  }
+
+
+  render () {
+   
   return (
     <div className="navigation">
       <nav className="navbar  justify-content-between" id="navigation">
-        <a className="navbar-brand">HabiTrack</a>
+        <h3 className="navbar-brand">HabiTrack</h3>
         <Link to="/" className="nav-link">
-          <button type="button" id="navButton">
+          <button type="button" id="navButton" onClick={this.Logout}>
             Logout
           </button>
         </Link>
+        
       </nav>
 
-      {/* <ul className="nav justify-content-end">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            <button type="button" id="navButton">
-              Logout
-            </button>
-          </Link>
-        </li>
-      </ul> */}
     </div>
   );
+   }
 };
 
 export default Navigation;
+

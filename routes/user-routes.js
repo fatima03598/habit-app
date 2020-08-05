@@ -44,6 +44,7 @@ router.post("/signup", (req, res, next) => {
 router.get("/getInfo/:username/:token", async(req, res, next) => {
   const token = req.params.token
   const username = req.params.username
+  console.log(token, username)
   // if(authenticate(token, username)) {
   //   Users.getSingle(userReq.username)
   //   .then( (user) => {

@@ -1,19 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Recursive&display=swap");
 .App {
+  display: flex;
   text-align: center;
   /* font-family: "Bebas Neue", cursive; */
-  font-family: "Righteous", cursive;
+  font-family: 'Recursive', sans-serif;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -30,38 +23,29 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 #submitted {
   display: none;
 }
 
-div#HomePage {
-  background-color: beige;
-}
+
 .App-body {
-  background-color: ghostwhite;
-  padding: 50px;
-  margin: 15px;
+  display: flex;
+  background-color: #F1FAEE;
+  justify-content: center;
+  justify-self: center;
+  align-self: center;
+  width: 50%;
+  height: 60%;
+  padding: 3em;
 }
+
 label {
   font-size: 20px;
   font-family: "Raleway", sans-serif;
   color: cadetblue;
 }
-label.habitLabel {
-  width: 450px;
-  color: brown;
-  font-size: 30px;
-  font-weight: 600;
-}
+
 .todaysTask {
   margin: 10px;
   padding: 5px;
@@ -69,9 +53,7 @@ label.habitLabel {
   float: center;
   padding-left: 100px;
 }
-img.habitimage {
-  width: 70px;
-}
+
 
 span#drinks {
   background-color: #61dafb;
@@ -107,65 +89,78 @@ div#habitDisplay {
   display: block;
 }
 
-div#HomePage {
-  background-color: beige;
-  padding-top: 20px;
-}
-p {
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  font-size: 30px;
-  color: brown;
-  font-weight: 600;
-}
+
+
 button#navButton {
-  background-color: #e89a5a;
+  background-color: #E63946;
   padding: 5px 10px 5px 10px;
   border: none;
   border-radius: 5px;
-  color: dimgrey;
-  font-size: x-large;
+  color: #F1FAEE;
 }
-button.loginButton {
+
+button#navButton:hover {
+  background-color: #9c2630;
+
+}
+button.loginButton, #signUpbutton {
   padding: 10px 15px 10px 15px;
   margin-right: 25px;
-  background-color: #e89a5a;
+  background-color: #1D3557;
   border: none;
   border-radius: 5px;
   color: whitesmoke;
-  font-size: larger;
+  
 }
-div#HomePage {
-  background-color: #579b7f;
-  padding-top: 20px;
-  min-height: 100vh;
+
+button.loginButton:hover, #signUpbutton:hover {
+  background-color: #101e31;
 }
+
 div#formArea {
-  border-radius: 50px;
-  background-color: #99e3c4;
+  background-color: #F1FAEE;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  width: 50%;
+  height: 60%;
+  padding: 3em;
   /* color: brown; */
 }
 nav#navigation {
-  background-color: #91e5c9;
+  display: flex;
+  background-color: #1D3557;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  top:0;
+  left: 0;
+  right: 0;
 }
-div#habitCheckDiv {
-  background-color: #f0aa60;
+.navButtons{
+  display: flex;
+  
 }
-img.habitimage1 {
-  width: 50px;
+nav#navigation h3 {
+  color: #F1FAEE;
+  font-size: 2em;
 }
-div#viewHabit {
-  width: 800px;
-}
-span.input-group-text {
-  width: 250px;
-  height: 100px;
-}
-div#aside1 {
-  margin: 10px;
-}
-button.btn.btn-primary.btn-lg.btn-block {
-  background-color: #e97929;
-  border: none;
-  padding: 10px;
+
+
+@media only screen and (max-width: 600px)  {
+  nav#navigation h3 {
+  
+    font-size: 15px;
+  }
+  #navButton {
+    font-size: 7px;
+  }
+  .App-body {
+    margin-top: 3em;
+    width: 80%;
+  }
+  nav#navigation {
+    padding: 2px;
+  }
+
 }

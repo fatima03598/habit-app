@@ -1,82 +1,38 @@
 import React, { Component } from "react";
 import ViewHabit from "./ViewHabit";
 
+
+
 class Streak extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStreak: 0,
-      highestStreak: 0,
+      currentStreak:0,
+      highestStreak:0
     };
   }
+ 
   componentDidMount() {
-    this.setState(
-      {
-        currentStreak: parseInt(this.props.current_streak),
-        highestStreak: parseInt(this.props.highest_streak),
-      },
-      () => this.sendStreak()
-      // () => this.checkStreak()
-    );
-  }
-
-  increment = () => {
-    this.setState(
-      {
-        currentStreak: this.state.currentStreak + 1,
-      },
-      () => {
-        if (this.state.currentStreak > this.props.highest_streak) {
-          this.higher();
-        }
-      }
-    );
-  };
-
-  higher = () => {
+  const date = this.props.date
+  const lastDate = this.props.complete.length - 1
+   if(this.props.complete.length > 1 && this.props.complete[lastDate] !== date) {
+   this.sendStreak()
+   }else {
     this.setState({
-      highestStreak: this.state.currentStreak,
-    });
-  };
-
-  async sendStreak() {
-    await this.checkStreak();
-    this.submitStreak();
+      currentStreak:this.props.current_streak,
+      highestStreak:this.props.highest_streak
+    })
+  }
   }
 
-  checkStreak = () => {
-    if (this.props.complete.length > 0) {
-      const latestDate = this.props.complete[this.props.complete.length - 1];
-      const lastDate = new Date(latestDate.split("-").reverse().join("/"));
-      const now = new Date(this.props.date.split("-").reverse().join("/"));
-      const one_day = 1000 * 60 * 60 * 24;
-      const diff = Math.ceil((now.getTime() - lastDate.getTime()) / one_day);
-      console.log(diff);
-
-      if (
-        (this.props.frequency === "daily" && diff === 1) ||
-        (this.props.frequency === "weekly" && diff === 7) ||
-        (this.props.frequency === "monthly" && diff === 30)
-      ) {
-        this.increment();
-      } else {
-        this.setState(
-          {
-            currentStreak: 0,
-          },
-          () => this.submitStreak()
-        );
-      }
-    }
-  };
-
-  submitStreak = () => {
-    const CurrentStreak = this.props.date + "-" + this.state.currentStreak;
-    const HighestStreak = this.props.date + "-" + this.state.highestStreak;
-
+  
+  async sendStreak() {
+    const currentHighestArray = await this.checkStreak(this.props.complete, parseInt(this.props.current_streak), parseInt(this.props.highest_streak));
+    if(currentHighestArray[0] != this.props.current_streak || currentHighestArray[1] != this.props.highest_streak ) {
+    
     const data = {
-      current_streak: CurrentStreak,
-      highest_streak: HighestStreak,
+      current_streak: currentHighestArray[0],
+      highest_streak: currentHighestArray[1],
     };
 
     fetch("/habitapi/addStrike/" + this.props.habit, {
@@ -85,28 +41,57 @@ class Streak extends Component {
         "Content-type": "application/json; charset=UTF-8",
       },
       body: JSON.stringify(data),
-    }).catch((error) => {
+    })
+    .then(() => {
+      this.setState({
+        currentStreak:currentHighestArray[0],
+        highestStreak:currentHighestArray[1]
+      })
+    })
+    .catch((error) => {
       console.log("Error:", error);
     });
-  };
+  }
+  
+    
+  }
+
+  isConsecutive = (arr, diff=0)=> {
+    const array = arr.reverse()
+    const latestDate = arr.reverse()[0]
+    const previousDate = array[1]
+    const lastDate = new Date(latestDate.split("-").reverse().join("/"));
+    const now = new Date(previousDate.split("-").reverse().join("/"));
+    console.log(lastDate, now)
+    const one_day = 1000 * 60 * 60 * 24;
+    const difference = Math.ceil((now.getTime() - lastDate.getTime()) / one_day);
+    return  difference == diff ? true :  false 
+  }
+
+   checkStreak = (arr, current, highest) => {
+     let diff;
+    this.props.frequency === 'daily' ? diff=1 : this.props.frequency === 'weekly' ? diff=7 : diff=30
+    if(this.isConsecutive(arr, diff)) {
+     current +=1
+     current > highest ? highest = current : console.log('not higher')
+      return [current, highest]
+    } else { 
+      current = 0
+       return [current, highest]
+    } 
+  }
+
 
   render() {
-    // this.sendStreak()
     return (
       <div className="Streak">
         {this.props.complete ? (
           <div>
-            {/* <ViewHabit current={this.state.currentStreak}
-              highest= {this.state.highestStreak} /> */}
 
-            <h3>current streak: {this.state.currentStreak}</h3>
-            <h3>highest streak: {this.state.highestStreak}</h3>
+            <p>Current streak: {this.state.currentStreak} <img className="fireStreak" src="/fire.png" alt="fireStreak"></img></p>
+            <p>Highest streak: {this.state.highestStreak} <img className="fireStreak" src="/fire.png" alt="fireStreak"></img></p>
           </div>
-        ) : (
-          <div>
-            <h1>None</h1>{" "}
-          </div>
-        )}
+        ) : null}
       </div>
     );
   }
