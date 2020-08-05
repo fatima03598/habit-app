@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Dashboard from '../Containers/Dashboard'
-import {  Redirect } from "react-router-dom";
+import { Spinner } from 'reactstrap';
 
 class LoadingPage extends Component {
     constructor(props) {
@@ -49,7 +49,10 @@ class LoadingPage extends Component {
      
     return (
         <div>
-            { this.state.dashboard ? <Dashboard dayWeek={this.state.dayWeek} date={this.state.date} data={this.state.data}/> : <h1>Loading ...</h1>}
+            { this.state.dashboard ? 
+            <Dashboard dayWeek={this.state.dayWeek} date={this.state.date} data={this.state.data}/> 
+            : <div><h1>Loading ...</h1> <Spinner color="info" style={{ width: '5rem', height: '5rem' }} /></div>
+            }
         </div>
     )
 }

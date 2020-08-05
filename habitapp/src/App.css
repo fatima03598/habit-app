@@ -34,6 +34,7 @@
   background-color: #F1FAEE;
   justify-content: center;
   justify-self: center;
+  align-self: center;
   width: 50%;
   height: 60%;
   padding: 3em;
@@ -44,12 +45,7 @@ label {
   font-family: "Raleway", sans-serif;
   color: cadetblue;
 }
-label.habitLabel {
-  width: 450px;
-  color: brown;
-  font-size: 30px;
-  font-weight: 600;
-}
+
 .todaysTask {
   margin: 10px;
   padding: 5px;
@@ -57,9 +53,7 @@ label.habitLabel {
   float: center;
   padding-left: 100px;
 }
-img.habitimage {
-  width: 70px;
-}
+
 
 span#drinks {
   background-color: #61dafb;
@@ -96,13 +90,7 @@ div#habitDisplay {
 }
 
 
-p {
-  text-align: center;
-  font-family: "Raleway", sans-serif;
-  font-size: 30px;
-  color: brown;
-  font-weight: 600;
-}
+
 button#navButton {
   background-color: #E63946;
   padding: 5px 10px 5px 10px;
@@ -128,16 +116,7 @@ button.loginButton, #signUpbutton {
 button.loginButton:hover, #signUpbutton:hover {
   background-color: #101e31;
 }
-div#HomePage {
-  display: flex;
-  flex-direction: column;
-  background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
-  min-height: 95vh;
-  width: 100%;
-  justify-content: space-evenly;
-  align-items: center;
-  
-}
+
 div#formArea {
   background-color: #F1FAEE;
   display: flex;
@@ -166,27 +145,7 @@ nav#navigation h3 {
   color: #F1FAEE;
   font-size: 2em;
 }
-div#habitCheckDiv {
-  background-color: #f0aa60;
-}
-img.habitimage1 {
-  width: 50px;
-}
-div#viewHabit {
-  width: 800px;
-}
-span.input-group-text {
-  width: 250px;
-  height: 100px;
-}
-div#aside1 {
-  margin: 10px;
-}
-button.btn.btn-primary.btn-lg.btn-block {
-  background-color: #e97929;
-  border: none;
-  padding: 10px;
-}
+
 
 @media only screen and (max-width: 600px)  {
   nav#navigation h3 {

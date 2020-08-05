@@ -1,15 +1,12 @@
 import React from "react";
 import "./App.css";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-//components
-
-//containers
 import RegisterPage from "./Containers/RegisterPage";
 import LoginPage from "./Containers/LoginPage";
 import PrivateRoute from "./Components/PrivateRoute";
 import LoadingPage from "./Components/LoadingPage";
 import MainPage from "./Components/MainPage";
-import Footer from "./Components/Footer";
+
 
 
 class App extends React.Component {
@@ -32,7 +29,7 @@ class App extends React.Component {
 
            
           </Switch>
-          <Footer/>
+        
         </Router>
       </div>
     );

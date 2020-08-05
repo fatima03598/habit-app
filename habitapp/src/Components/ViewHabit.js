@@ -8,54 +8,81 @@ class ViewHabit extends Component {
     this.state = {
       habitData: [],
       displayHabit: "",
+      submitHabit: "",
+      complete: false,
     };
   }
+  
   componentDidMount() {
     fetch(`/habitapi/${this.props.user}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({ habitData: data });
       });
   }
 
-  getStreak = (string) => {
-    let splitDate = string.split("-");
-    return parseInt(splitDate[3]);
+  handleDelete(event, id) {
+    const habitID = id;
+    console.log(id)
+    if (window.confirm("Are you sure you want to delete it forever") === true) {
+      fetch("habitapi/deletehabit", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          habit_id: habitID,
+        }),
+      })
+        .then((response) => {
+          response.json();
+        })
+        .then(this.refreshPage());
+    }
+  }
+
+  refreshPage = () => {
+    window.location.reload(false);
   };
+
   render() {
-    // const logo = this.props.description;
-    // console.log(logo)
-    // const logo1 = logo + ".png";
     return (
       <div id="viewHabits">
         {this.state.habitData ? (
           this.state.habitData.map((object) => (
-            <div key={object}>
-              <div className="input-group" id="viewHabits">
-                <div className="input-group-prepend">
-                  <span className="input-group-text">
-                    <label>{object.description} : {object.frequency}</label>
-                  </span>
-                  <span className="input-group-text">
-                    <label htmlFor={object.habitName} className="habitLabel">
-                      {object.habitName}
-                    </label>
-                  </span>
-                  <span className="input-group-text">
-                    <label>
-                      <Streak
+            <div key={object.habit_id} className="viewHabit">
+         
+               <article className="habitInfo">
+                 <h3>{object.habitName}</h3>
+                 <p>{object.frequency}</p>
+                 <h6>{object.description}</h6>
+               </article>
+                <article className="habitStreak">
+                <Streak
                         habit={object.habit_id}
                         date={this.props.date}
                         complete={object.complete}
-                        current_streak={this.getStreak(object.current_streak)}
-                        highest_streak={this.getStreak(object.highest_streak)}
+                        current_streak={object.current_streak}
+                        highest_streak={object.highest_streak}
                         frequency={object.frequency}
                       />
-                    </label>
-                  </span>
-                </div>
-              </div>
+
+                </article>
+                <article className='deleteHabit'>
+                <button
+                key={object.habit_id}
+              onClick={(e) => this.handleDelete(e,object.habit_id)}
+              className="btn btn-outline-danger button-style justify-items-start"
+              type="button"
+            >
+              <img src="trash.png" alt="Avatar" className="deleteImage" />
+            </button>
+
+                </article>
+                 
+  
+          
             </div>
           ))
         ) : (
