@@ -1,8 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from "react-router-dom";
 
-console.log(localStorage.getItem('token'))
-console.log(localStorage.getItem('username'))
+
 
 export default function PrivateRoute({component: Component, authenticated, ...rest}) {
     const username = localStorage.getItem('username');

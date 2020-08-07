@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
-import alert from "alert";
+import { Redirect} from "react-router-dom";
 import NavBar from "../Components/NavBar";
 class LoginPage extends Component {
   constructor(props) {

@@ -20,17 +20,19 @@ class Dashboard extends Component {
               Welcome: {userName} {userSurname}
             </h3>
             <section className="habitsMain">
-                <div className="habitCheck">
-                  <HabitCheckForm user={user_id} date={date} />
-                </div>
-                <div className="viewHabits">
-                  <ViewHabit user={user_id} date={date} />
-                </div>
+              <div className="habitCheck">
+                <HabitCheckForm user={user_id} date={date} />
+              </div>
+              <div className="viewHabits">
+                        <ViewHabit user={user_id} date={date} />
+                      </div>
+              </section>
+           <section className="newHabit" >
+              <div className="newHabit">
+                <NewHabit user={user_id} date={date} />
+              </div>
             </section>
-            <section className="newHabit">
-              <NewHabit user={user_id} date={date} />
-            </section>        
-                 
+                   
       </div>
                
           

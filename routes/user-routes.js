@@ -41,24 +41,11 @@ router.post("/signup", (req, res, next) => {
 });
 
 
-router.get("/getInfo/:username/:token", async(req, res, next) => {
-  const token = req.params.token
-  const username = req.params.username
-  console.log(token, username)
-  // if(authenticate(token, username)) {
-  //   Users.getSingle(userReq.username)
-  //   .then( (user) => {
-  //       const userInfo = {
-  //         user_id: user.user_id,
-  //         userName: user.name,
-  //         userSurname: user.surname
-  //       }
-  //       return res.status(200).json({userInfo})
-  //   })
-  // } else {
-  //   res.status(404).json({message: "not logged in"})
- // }
+router.get("/getInfo/:username/", async(req, res, next) => {
  try {
+  const token = req.query.token
+  console.log(token)
+  const username = req.params.username
   await authenticate(token, username)
   Users.getSingle(username)
      .then((foundUser) => {
