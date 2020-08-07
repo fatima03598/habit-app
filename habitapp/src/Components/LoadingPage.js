@@ -36,7 +36,7 @@ class LoadingPage extends Component {
           date: newdate,
           dayWeek: dayWeek,
         });
-        fetch(`api/getInfo/${username}/${token}`)
+        fetch(`api/getInfo/${username}/?token=${token}`)
         .then(response => response.json())
         .then(data => this.setState({
               data:data.userInfo,

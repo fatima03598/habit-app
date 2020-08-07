@@ -1,15 +1,20 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import {  Redirect } from "react-router-dom";
 
  class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirected:false,
+    };
+    this.Logout = this.Logout.bind(this)
+  }
 
 
   async Logout (e) {
     e.preventDefault();
     const username = await localStorage.getItem('username');
     const token = await localStorage.getItem('token');
-    console.log(username)  
-    console.log(token) 
       const data = {
         username: username,
         token:token
@@ -30,6 +35,9 @@ import { Link } from "react-router-dom";
             delete localStorage.token
              return response.json()}
         })
+        .then((result) => {this.setState({
+          redirected:true
+        })})
         .catch((error) => {
           console.log("error: " + error);
         });
@@ -38,17 +46,21 @@ import { Link } from "react-router-dom";
 
 
   render () {
+    if(this.state.redirected){
+      return(
+     <Redirect to='/'/>
+      )
+    }
    
   return (
     <div className="navigation">
       <nav className="navbar  justify-content-between" id="navigation">
         <h3 className="navbar-brand">HabiTrack</h3>
-        <Link to="/" className="nav-link">
-          <button type="button" id="navButton" onClick={this.Logout}>
+    
+          <button className="nav-link" type="button" id="navButton" onClick={this.Logout}>
             Logout
           </button>
-        </Link>
-        
+      
       </nav>
 
     </div>

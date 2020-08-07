@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import Streak from "./Streak";
 
 class ViewHabit extends Component {
@@ -79,10 +78,7 @@ class ViewHabit extends Component {
               <img src="trash.png" alt="Avatar" className="deleteImage" />
             </button>
 
-                </article>
-                 
-  
-          
+                </article>        
             </div>
           ))
         ) : (
