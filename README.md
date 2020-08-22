@@ -5,6 +5,18 @@ Habit App website where registered user can add habits and track them; while als
 
 ![Recipe app](./habit.gif)
 
+
+
+## Main Technologies & Langauge 
+* JavaScript
+* React js
+* Node.js
+* Jest & Enzyme 
+* Express.js
+* bcrypt - to hash passwords and token authentication 
+* Knex.js with pg 
+* Mocha & Chai
+
 ## Requirements
 
 * Postgres account
@@ -54,15 +66,6 @@ npm start
 * As a user, I can track my habits and tick them as completed for the day
 * As a user, I can check my current and highest streak of my habit 
 * As a user, I can delete my habit
-
-## Main Technologies
-* React js
-* Node.js
-* Jest & Enzyme
-* Express.js
-* bcrypt 
-* Knex.js with pg 
-* Mocha & Chai
 
 
 
